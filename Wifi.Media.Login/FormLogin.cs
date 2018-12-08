@@ -62,6 +62,7 @@ namespace Wifi.Media.Login
                 this.labelPasswordRepeat.Visible = true;
                 this.textBoxPasswordRepeat.Visible = true;
                 this.labelLogin.Text = "REGISTRIEREN";
+                this.Text = "Medienverwaltung - Registieren";
 
                 this.buttonRegister.Visible = false;
 
@@ -75,6 +76,7 @@ namespace Wifi.Media.Login
                 this.labelPasswordRepeat.Visible = false;
                 this.textBoxPasswordRepeat.Visible = false;
                 this.labelLogin.Text = "LOGIN";
+                this.Text = "Medienverwaltung - Login";
 
                 this.buttonRegister.Visible = true;
 

@@ -142,7 +142,7 @@
             this.buttonRegister.UseVisualStyleBackColor = true;
             this.buttonRegister.Click += new System.EventHandler(this.buttonRegister_Click);
             // 
-            // Form1
+            // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -160,9 +160,9 @@
             this.Controls.Add(this.textBoxUsername);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "FormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Medienverwaltung";
+            this.Text = "Medienverwaltung - Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 
