@@ -15,6 +15,8 @@ namespace Wifi.Media.Medienverwaltung
 {
     public partial class FormMain : Form
     {
+        List<string> playlist = new List<string>();
+
         public FormMain()
         {
             InitializeComponent();
@@ -80,21 +82,53 @@ namespace Wifi.Media.Medienverwaltung
 
             
 
-
-
-
         }
 
         private void listView1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '\r')
             {
-                string wmplayer = "wmplayer.exe";
-                string path = @"C:\Solutions\Wifi.Media\Musik\Slipknot\Album 1\Before I Forget.mp3";
-                if (1 == 1) ;
-                
-                Process.Start(wmplayer, path);
+                Play();
             }
+        }
+
+
+        public void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            
+            playlist.Add($"C:\\Solutions\\Wifi.Media\\Musik\\{this.treeView1.SelectedNode.FullPath}\\{this.listView1.FocusedItem.Text}");
+
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.listView1.FocusedItem != null)
+            {
+                Play();
+            }
+        }
+
+        private void Play()
+        {
+            string wmplayer = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Windows Media Player.lnk";
+            string path = $"C:\\Solutions\\Wifi.Media\\Musik\\{this.treeView1.SelectedNode.FullPath}\\{this.listView1.FocusedItem.Text}";
+            string test = this.treeView1.SelectedNode.FullPath;
+
+            // Process.Start(wmplayer, "\"" + path + "\"");
+
+            //for (int i = 0; i <= 2; i++)
+            //{
+            //    Process.Start(wmplayer, "\"" + playlist[i] + "\"");
+            //}
+
+
+            Process p = new Process();
+            p.StartInfo.FileName = wmplayer;
+            //p.StartInfo.Arguments = "\"" + playlist[0] + "\"";
+            //p.StartInfo.Arguments = "\"" + playlist[1] + "\"";
+            p.StartInfo.Arguments = "\"" + path + "\"";
+            p.Start();
         }
     }
 }
