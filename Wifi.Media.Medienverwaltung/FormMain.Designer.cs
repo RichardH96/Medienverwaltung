@@ -41,7 +41,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.playlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newSongsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,9 +50,13 @@
             this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPlayPauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importSongsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editSongsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemLoad = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeImportSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBoxMenuImportSettings = new System.Windows.Forms.ToolStripComboBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,6 +151,7 @@
             // 
             this.programToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importSongsToolStripMenuItem,
+            this.editSongsToolStripMenuItem,
             this.MenuItemSaveAs,
             this.MenuItemSave,
             this.MenuItemLoad,
@@ -161,15 +165,6 @@
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(196, 6);
-            // 
-            // MenuItemExit
-            // 
-            this.MenuItemExit.Image = global::Wifi.Media.Medienverwaltung.Properties.Resources.Close_16x;
-            this.MenuItemExit.Name = "MenuItemExit";
-            this.MenuItemExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.MenuItemExit.Size = new System.Drawing.Size(199, 26);
-            this.MenuItemExit.Text = "Exit";
-            this.MenuItemExit.Click += new System.EventHandler(this.MenuItemExit_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -195,6 +190,7 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeImportSettingsToolStripMenuItem,
             this.changeColoursToolStripMenuItem,
             this.showPlayPauseToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
@@ -207,25 +203,25 @@
             this.redToolStripMenuItem,
             this.blueToolStripMenuItem});
             this.changeColoursToolStripMenuItem.Name = "changeColoursToolStripMenuItem";
-            this.changeColoursToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.changeColoursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.changeColoursToolStripMenuItem.Text = "Change Colours";
             // 
             // redToolStripMenuItem
             // 
             this.redToolStripMenuItem.Name = "redToolStripMenuItem";
-            this.redToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.redToolStripMenuItem.Text = "Red";
             // 
             // blueToolStripMenuItem
             // 
             this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
-            this.blueToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.blueToolStripMenuItem.Text = "Blue";
             // 
             // showPlayPauseToolStripMenuItem
             // 
             this.showPlayPauseToolStripMenuItem.Name = "showPlayPauseToolStripMenuItem";
-            this.showPlayPauseToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.showPlayPauseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showPlayPauseToolStripMenuItem.Text = "Show Play/Pause";
             // 
             // importSongsToolStripMenuItem
@@ -236,6 +232,14 @@
             this.importSongsToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             this.importSongsToolStripMenuItem.Text = "Import Songs";
             this.importSongsToolStripMenuItem.Click += new System.EventHandler(this.importSongsToolStripMenuItem_Click);
+            // 
+            // editSongsToolStripMenuItem
+            // 
+            this.editSongsToolStripMenuItem.Image = global::Wifi.Media.Medienverwaltung.Properties.Resources.Cut_16x;
+            this.editSongsToolStripMenuItem.Name = "editSongsToolStripMenuItem";
+            this.editSongsToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            this.editSongsToolStripMenuItem.Text = "Edit Songs Details";
+            this.editSongsToolStripMenuItem.Click += new System.EventHandler(this.editSongsToolStripMenuItem_Click);
             // 
             // MenuItemSaveAs
             // 
@@ -249,6 +253,7 @@
             // 
             // MenuItemSave
             // 
+            this.MenuItemSave.Enabled = false;
             this.MenuItemSave.Image = global::Wifi.Media.Medienverwaltung.Properties.Resources.Save_16x;
             this.MenuItemSave.Name = "MenuItemSave";
             this.MenuItemSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
@@ -264,6 +269,34 @@
             this.MenuItemLoad.Size = new System.Drawing.Size(199, 26);
             this.MenuItemLoad.Text = "Load";
             this.MenuItemLoad.Click += new System.EventHandler(this.MenuItemLoad_Click);
+            // 
+            // MenuItemExit
+            // 
+            this.MenuItemExit.Image = global::Wifi.Media.Medienverwaltung.Properties.Resources.Close_16x;
+            this.MenuItemExit.Name = "MenuItemExit";
+            this.MenuItemExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.MenuItemExit.Size = new System.Drawing.Size(199, 26);
+            this.MenuItemExit.Text = "Exit";
+            this.MenuItemExit.Click += new System.EventHandler(this.MenuItemExit_Click);
+            // 
+            // changeImportSettingsToolStripMenuItem
+            // 
+            this.changeImportSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBoxMenuImportSettings});
+            this.changeImportSettingsToolStripMenuItem.Name = "changeImportSettingsToolStripMenuItem";
+            this.changeImportSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changeImportSettingsToolStripMenuItem.Text = "Import Settings";
+            // 
+            // toolStripComboBoxMenuImportSettings
+            // 
+            this.toolStripComboBoxMenuImportSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.toolStripComboBoxMenuImportSettings.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxMenuImportSettings.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.toolStripComboBoxMenuImportSettings.Items.AddRange(new object[] {
+            "normal",
+            "Auto-Edit"});
+            this.toolStripComboBoxMenuImportSettings.Name = "toolStripComboBoxMenuImportSettings";
+            this.toolStripComboBoxMenuImportSettings.Size = new System.Drawing.Size(121, 23);
             // 
             // FormMain
             // 
@@ -313,6 +346,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem MenuItemExit;
         private System.Windows.Forms.ToolStripMenuItem importSongsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editSongsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeImportSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxMenuImportSettings;
     }
 }
 

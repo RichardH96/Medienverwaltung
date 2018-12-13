@@ -28,6 +28,8 @@ namespace Wifi.Media.Data
         public TimeSpan Duration { get; set; }
         public string Language { get; set; }
         public string FilePath { get; set; }
+        public bool IsChanged { get; set; }
+        public string AlbumName { get; set; }
         #endregion
     }
 }

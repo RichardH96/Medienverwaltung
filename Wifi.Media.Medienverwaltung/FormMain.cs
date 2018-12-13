@@ -18,8 +18,10 @@ namespace Wifi.Media.Medienverwaltung
 {
     public partial class FormMain : Form
     {
-        
+        public List<Song> allSongs = null;
         private List<Artist> artists = new List<Artist>();
+        bool changesSaved = true;
+        string savePath = string.Empty;
 
         public FormMain()
         {
@@ -62,7 +64,7 @@ namespace Wifi.Media.Medienverwaltung
             //##############################################################################
         }
 
-        #region Play / SongDetail
+        #region Play 
         
         
 
@@ -82,13 +84,7 @@ namespace Wifi.Media.Medienverwaltung
             //    Play();
             //}
 
-            ListViewItem item = this.listView1.GetItemAt(e.X, e.Y);
-            FormSongDetail fsd = new FormSongDetail((Song)item.Tag);
-            fsd.ShowDialog();
-            if (fsd.DialogResult == DialogResult.OK)
-            {
-                this.listView1.Items.Clear();
-            }
+            
 
         }
 
@@ -108,30 +104,76 @@ namespace Wifi.Media.Medienverwaltung
 
         //##############################################################################
 
-        #region Menu - Program
+        #region Menu - Program / SongDetail
 
+        //************************************************
 
         private void MenuItemExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (changesSaved == true)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                MessageBox.Show("unsaved Changes");
+            }
+            
         }
+
+        //************************************************
 
         private void MenuItemLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                this.treeView1.Nodes.Clear();
+                savePath = dialog.FileName;
                 StreamReader reader = new StreamReader(dialog.FileName, Encoding.UTF8);
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Artist>));
-                List<Artist> artist = (List<Artist>)serializer.Deserialize(reader);
+                List<Artist> artists = (List<Artist>)serializer.Deserialize(reader);
                 reader.Close();
+
+                //*********************************************************
+                #region Load Treeview
+
+                TreeNode artistNode = null;
+                TreeNode albumNode = null;
+                foreach (Artist artist in artists) // Load Treeview
+                {
+                    
+                    artistNode = new TreeNode(artist.Name);
+                    artistNode.Tag = artist;
+                    this.treeView1.Nodes.Add(artistNode);
+
+                    foreach (Album album in artist.Albums)
+                    {
+                        albumNode = new TreeNode(album.Name);
+                        albumNode.Tag = album;
+                        artistNode.Nodes.Add(albumNode);
+                    }
+
+                }
+
+                #endregion
+                //*********************************************************
             }
         }
 
+        //************************************************
+
         private void MenuItemSave_Click(object sender, EventArgs e)
         {
-           
+            File.Delete(savePath);
+            StreamWriter writer = new StreamWriter(savePath, false, Encoding.UTF8);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Artist>));
+            serializer.Serialize(writer, this.artists);
+            writer.Close();
+            this.changesSaved = true;
         }
+
+        //************************************************
 
         private void MenuItemSaveAs_Click(object sender, EventArgs e)
         {
@@ -140,13 +182,16 @@ namespace Wifi.Media.Medienverwaltung
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                savePath = dialog.FileName;
                 StreamWriter writer = new StreamWriter(dialog.FileName, false, Encoding.UTF8);
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Artist>));
                 serializer.Serialize(writer, this.artists);
                 writer.Close();
-
+                this.changesSaved = true;
             }
         }
+
+        //************************************************
 
         private void importSongsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -154,9 +199,59 @@ namespace Wifi.Media.Medienverwaltung
             dialog.SelectedPath = "c:\\Solutions\\Wifi.Media\\Musik";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                this.treeView1.Nodes.Clear();
                 ReadFileSystem(dialog.SelectedPath);
             }
+            this.changesSaved = false;
         }
+
+        //************************************************
+
+        private void editSongsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<Song> unchangedSongs = new List<Song>();
+
+            foreach (TreeNode node in this.treeView1.Nodes)
+            {
+                foreach(TreeNode subNodes in node.Nodes)
+                {
+                    if (subNodes.Tag is Album)
+                    {
+                        Album album = (Album)subNodes.Tag;
+
+                        foreach (Song song in album.Songs)
+                        {
+                            if (!song.IsChanged)
+                            {
+                                unchangedSongs.Add(song);
+                            }
+                        }
+                    }
+                }
+
+                
+            }
+
+
+            if (unchangedSongs == null)
+            {
+                MessageBox.Show("No unedited Songs!");
+            }
+            else
+            {
+                FormSongDetail fsd = new FormSongDetail(unchangedSongs);
+                fsd.Show();
+                if (fsd.DialogResult == DialogResult.OK)
+                {
+                    this.listView1.Items.Clear();
+                    this.changesSaved = false;
+                }
+            }
+           
+            
+        }
+
+        //************************************************
 
         #endregion
 
@@ -192,8 +287,10 @@ namespace Wifi.Media.Medienverwaltung
 
         }
 
-
         
+
+
+
 
 
 
@@ -205,6 +302,6 @@ namespace Wifi.Media.Medienverwaltung
         //##############################################################################
 
 
-        
+
     }
 }

@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Wifi.Media.Data
 {
     [System.Serializable()]
     public class Album
     {
+        
         //**************************************************************************************************
         #region constructors
 
@@ -25,7 +27,7 @@ namespace Wifi.Media.Data
             int idx = 0;
             foreach (string file in Directory.EnumerateFiles(path, "*.mp3"))
             {
-                this.songs.Add(new Song(file) { TrackNo = ++idx });
+                this.songs.Add(new Song(file) { TrackNo = ++idx, IsChanged = false, AlbumName = this.Name });
             }
         }
 
