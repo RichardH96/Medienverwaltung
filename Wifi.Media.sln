@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.Media.Login", "Wifi.Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.Media.Medienverwaltung", "Wifi.Media.Medienverwaltung\Wifi.Media.Medienverwaltung.csproj", "{5173AEB3-4D48-40FF-9680-A225263EB3A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.Media.Medienverwaltung.Song_Detail", "Wifi.Media.Medienverwaltung.Song_Detail\Wifi.Media.Medienverwaltung.Song_Detail.csproj", "{AE70EBBE-2C5B-4E2C-B76D-7FC0250DE0B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5173AEB3-4D48-40FF-9680-A225263EB3A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5173AEB3-4D48-40FF-9680-A225263EB3A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5173AEB3-4D48-40FF-9680-A225263EB3A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE70EBBE-2C5B-4E2C-B76D-7FC0250DE0B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE70EBBE-2C5B-4E2C-B76D-7FC0250DE0B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE70EBBE-2C5B-4E2C-B76D-7FC0250DE0B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE70EBBE-2C5B-4E2C-B76D-7FC0250DE0B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
